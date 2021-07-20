@@ -3,6 +3,7 @@ package com.changgou.controller;
 
 import com.changgou.goods.pojo.Brand;
 import com.changgou.service.BrandService;
+import com.github.pagehelper.PageInfo;
 import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +52,26 @@ public class BrandController {
         return new Result(true, StatusCode.OK,"修改品牌成功");
 
     }
+    @DeleteMapping(value = "/{id}")
+    public Result delete(@PathVariable (value = "id") Integer id){
+        brandService.delete(id);
+        return new Result(true, StatusCode.OK,"删除成功");
+    }
+
+    @PostMapping(value="/search")
+    public  Result<List<Brand>> findList(@RequestBody Brand brand){
+        List<Brand> brands = brandService.findList(brand);
+        return new Result<List<Brand>>(true, StatusCode.OK,"模糊查询品牌成功",brands);
+
+    }
+
+//    实现分页查询
+    @GetMapping(value="/search/{page}/{size}")
+    public Result<PageInfo<Brand>> findPage(@PathVariable(value="page")Integer page,
+                                    @PathVariable(value = "size")Integer size){
+        PageInfo<Brand> pageInfo = brandService.findPage(page,size);
+        return new Result<PageInfo<Brand>>(true,StatusCode.OK,"分页查询成功",pageInfo);
+
+    }
+
 }
