@@ -13,5 +13,7 @@ public interface BrandService {
 
 //    添加品牌
     void add(Brand brand);
+//    根据id修改品牌
+    void update(Brand brand);
 
 }

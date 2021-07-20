@@ -30,4 +30,9 @@ public class BrandServiceImpl implements BrandService {
         brandMapper.insertSelective(brand);
     }
 
+    @Override
+    public void update(Brand brand) {
+        brandMapper.updateByPrimaryKeySelective(brand);
+    }
+
 }

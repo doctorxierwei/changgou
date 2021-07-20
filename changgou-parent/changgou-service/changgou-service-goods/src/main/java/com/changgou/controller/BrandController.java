@@ -44,4 +44,11 @@ public class BrandController {
         return new Result(true, StatusCode.OK,"增加品牌成功");
 
     }
+    @PutMapping(value = "/{id}")
+    public Result update(@PathVariable (value = "id") Integer id,@RequestBody Brand brand){
+          brand.setId(id);
+          brandService.update(brand);
+        return new Result(true, StatusCode.OK,"修改品牌成功");
+
+    }
 }
